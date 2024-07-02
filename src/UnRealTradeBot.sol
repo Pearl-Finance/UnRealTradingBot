@@ -6,9 +6,11 @@ import {ISwapRouter} from "./interfaces/ISwapRouter.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {IERC20, SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
-import {Test, console} from "forge-std/Test.sol";
-// add owner control
-
+/**
+ * @title UnRealTradeBot
+ * @author c-n-o-t-e
+ * @dev Contract is used to trade tokens in pools in pearl dex in batches/paths
+ */
 contract UnRealTradeBot is Ownable {
     using SafeERC20 for IERC20;
 
@@ -174,7 +176,6 @@ contract UnRealTradeBot is Ownable {
      * USTB/Pearl Fee:10000 -> Pearl/CAVIAR Fee:500
      * USTB/WREETH Fee:3000 -> WREETH/Real Fee:3000
      * DAI/USTB Fee:100 -> USTB/MORE Fee:100
-     * USTB/MORE Fee:100
      *
      * Second Path[]
      * USTB/arcUSD Fee:100 <- arcUSD/UKRE Fee:500

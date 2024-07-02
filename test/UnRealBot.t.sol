@@ -1,9 +1,23 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-// import {Test, console} from "forge-std/Test.sol";
+import {Test, console} from "forge-std/Test.sol";
 import "../src/UnRealTradeBot.sol";
 
+/**
+ * @title UnRealTradeBotTest
+ * @author c-n-o-t-e
+ * @dev Contract is used to test out UnRealTradeBot Contract in a stateless way.
+ *
+ * Functionalities Tested:
+ *  - AddPath()
+ *  - Withdraw()
+ *  - RunTrades()
+ *  - UpdatePath()
+ *  - RemovePath()
+ *  - Failed Scenarios
+ *  - UpdateAmountToTrade()
+ */
 contract UnRealTradeBotTest is Test {
     UnRealTradeBot public bot;
 
