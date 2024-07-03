@@ -79,18 +79,8 @@ contract UnRealTradeBot is Ownable {
         uint256 amountIn =
             uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, msg.sender))) % (partBalance + 1);
 
-        uint256 tokenOutBalanceBeforeTx = IERC20(tokenOut).balanceOf(address(this));
-        uint256 amountOut = router.getAmountOut(tokenIn, tokenOut, amountIn, fee);
-        uint256 amountOutMinimum = (amountOut * slippage) / PERCENTAGE;
-
         token.forceApprove(address(router), amountIn);
-        amountOut = router.swap(tokenIn, tokenOut, amountIn, amountOutMinimum, fee, feeOnTransfer);
-
+        router.swap(tokenIn, tokenOut, amountIn, 0, fee, feeOnTransfer);
         token.forceApprove(address(router), 0);
-        uint256 amountRecieved = IERC20(tokenOut).balanceOf(address(this)) - tokenOutBalanceBeforeTx;
-
-        if (amountRecieved < amountOutMinimum) {
-            revert UnRealTradeBot_BelowAmountOutMinimum();
-        }
     }
 }

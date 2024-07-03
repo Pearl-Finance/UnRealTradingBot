@@ -26,10 +26,9 @@ contract UnRealTradeBotTest is Test {
         vm.createSelectFork(REAL_RPC_URL, 118350);
 
         bot = new UnRealTradeBot(factor, router);
-        bot.setSlippage(50);
 
         vm.prank(0x4313e375882B1dAf17b036D9a45aA39796b988b4);
-        IERC20(USTB).transfer(address(bot), 1 ether);
+        IERC20(USTB).transfer(address(bot), 10 ether);
 
         vm.prank(0x6DE6E901Bbefd26a9888798a25E4A49309D04CA9);
         IERC20(DAI).transfer(address(bot), 3 ether);
