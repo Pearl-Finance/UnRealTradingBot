@@ -13,20 +13,12 @@ contract UnRealTradeBot is Ownable {
     IPearlRouter router;
     IPairFactory factory;
 
-    uint64 public slippage;
-    uint256 constant STABLE_FEE = 100;
-    uint256 constant PERCENTAGE = 1_000;
-
     error UnRealTradeBot_NoSwapMade();
     error UnRealTradeBot_BelowAmountOutMinimum();
 
     constructor(IPairFactory _factory, IPearlRouter _router) Ownable(msg.sender) {
         router = _router;
         factory = _factory;
-    }
-
-    function setSlippage(uint64 _slippage) external onlyOwner {
-        slippage = _slippage;
     }
 
     function swap() external returns (bool swapPassed) {
@@ -54,6 +46,7 @@ contract UnRealTradeBot is Ownable {
                     uint256 reserve0 = pool.reserve0();
                     uint256 reserve1 = pool.reserve1();
                     (address tokenIn, address tokenOut) = reserve0 > reserve1 ? (token1, token0) : (token0, token1);
+
                     _swap(tokenIn, tokenOut, fee, true);
                     if (!swapPassed) swapPassed = true;
                 } else if (token0ContractBalance > 0) {
